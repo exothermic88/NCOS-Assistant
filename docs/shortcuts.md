@@ -1,132 +1,131 @@
 # Keyboard Shortcuts
 
-NCOS provides a variety of keyboard shortcuts to enhance your productivity. Here's a detailed list:
+NCOS provides keyboard shortcuts for launching applications, managing windows,
+controlling media, and moving between workspaces. Each shortcut below is written
+as a plain-language statement so you can find the exact keys for what you want to
+do.
 
----
+Note: the `Super` key is the Windows / Command key on your keyboard.
+
+## Launch Applications
+
+These shortcuts open, launch, or start common applications:
+
+- **Open Discord:** The shortcut to open Discord is `Super + D`.
+- **Open Spotify:** The shortcut to open Spotify is `Super + Shift + S`.
+- **Open VSCode (Visual Studio Code):** The shortcut to open VSCode is `Super + C`.
+- **Open a Terminal:** The shortcut to open a terminal is `Super + T`.
+- **Open a Web Browser:** The shortcut to open a web browser is `Super + B`.
+- **Open the Text Editor:** The shortcut to open the text editor is `Super + E`.
+- **Open Settings:** The shortcut to open COSMIC Settings is `Super + ;`.
+- **Open PhoneSMS (phone text messaging):** The shortcut to open PhoneSMS is `Super + \`.
+- **Open the App Library:** The shortcut to open the app library is `Super + A`.
+- **Open the Launcher:** The shortcut to open the launcher is `Super + /`.
+- **Open the Home Folder (file manager):** The shortcut to open your home folder is `Super + F`.
+
+## Media, Volume, and Playback
+
+These shortcuts control audio playback and volume. Most use the dedicated media
+keys found on many keyboards:
+
+- **Increase volume:** Press the Volume Up media key (`XF86AudioRaiseVolume`).
+- **Decrease volume:** Press the Volume Down media key (`XF86AudioLowerVolume`).
+- **Mute audio output:** Press the Mute media key (`XF86AudioMute`).
+- **Mute microphone input:** Press the Mic Mute media key (`XF86AudioMicMute`).
+- **Play or pause:** Press the Play/Pause media key (`XF86AudioPlay`).
+- **Next track:** Press the Next Track media key (`XF86AudioNext`).
+- **Previous track:** Press the Previous Track media key (`XF86AudioPrev`).
+
+## Display and Brightness
+
+These shortcuts adjust screen brightness:
+
+- **Increase display brightness:** Press the Brightness Up key (`XF86MonBrightnessUp`).
+- **Decrease display brightness:** Press the Brightness Down key (`XF86MonBrightnessDown`).
+- **Keyboard backlight brightness:** Increasing or decreasing keyboard brightness is disabled by default (no shortcut assigned).
+
+## Screenshots, Lock, Theme, and Power
+
+- **Take a screenshot:** The shortcut to take a screenshot is `Print` (the Print Screen key).
+- **Lock the screen:** The shortcut to lock the screen is `Super + Escape`.
+- **Suspend the system:** The shortcut to suspend NCOS is `Super + Ctrl + Alt + S`.
+- **Switch to the previous theme:** The shortcut to cycle to the previous theme is `Super + Shift + [`.
+- **Switch to the next theme:** The shortcut to cycle to the next theme is `Super + Shift + ]`.
 
 ## Manage Windows
 
-| Action                   | Shortcut            |
-|--------------------------|---------------------|
-| **Close Window**         | `Super+Q`          |
-| **Maximize Window**      | `Super+M`          |
-| **Minimize Window**      | `Super+Minus`      |
-| **Resize Window Inwards**| `Super+Shift+R`    |
-| **Resize Window Outwards**| `Super+R`         |
-| **Toggle Sticky Window** | Disabled           |
+These shortcuts close, resize, and change the state of the focused window:
 
----
+- **Close the current window:** The shortcut to close a window is `Super + Q`.
+- **Maximize the current window:** The shortcut to maximize a window is `Super + M`.
+- **Minimize the current window:** The shortcut to minimize a window is `Super + Minus`.
+- **Resize the window outwards (larger):** The shortcut is `Super + R`.
+- **Resize the window inwards (smaller):** The shortcut is `Super + Shift + R`.
+- **Toggle a sticky window:** This shortcut is disabled by default.
 
-## Move Windows
+## Switch and Focus Between Windows
 
-| Action                   | Shortcut                          |
-|--------------------------|-----------------------------------|
-| **Move Window Down**     | `Super+Shift+Down` or `Super+Shift+J` |
-| **Move Window Left**     | `Super+Shift+Left` or `Super+Shift+H` |
-| **Move Window Right**    | `Super+Shift+Right` or `Super+Shift+L` |
-| **Move Window Up**       |   `Super+Shift+Up` or `Super+Shift+K`|
-| **Move Window to Previous Workspace** | Disabled |
-| **Move Window to Next Workspace**     | Disabled |
-| **Move Window to Last Workspace**     | `Super+Shift+0` |
-| **Move Window to Workspace 1**        | `Super+Shift+1` |
-| **Move Window to Workspace 2**        | `Super+Shift+2` |
-| **Move Window to Workspace 3**        | `Super+Shift+3` |
-| **Move Window to Workspace 4**        | `Super+Shift+4` |
-| **Move Window to Workspace 5**        | `Super+Shift+5` |
-| **Move Window to Workspace 6**        | `Super+Shift+6` |
-| **Move Window to Workspace 7**        | `Super+Shift+7` |
-| **Move Window to Workspace 8**        | `Super+Shift+8` |
-| **Move Window to Workspace 9**        | `Super+Shift+9` |
-| **Move Window to Previous Display** | `Super+Shift+Comma`             |
-| **Move Window to Next Display**     | `Super+Shift+Period`            |
-| **Move Window One Monitor Down**    |`Super+Ctrl+Shift+Down` or `Super+Ctrl+Shift+K`|
-| **Move Window One Monitor Left**    |`Super+Ctrl+Shift+Left` or `Super+Ctrl+Shift+H`|
-| **Move Window One Monitor Right**   |`Super+Ctrl+Shift+Right` or `Super+Ctrl+Shift+L`|
-| **Move Window One Monitor Up**      |`Super+Ctrl+Shift+Up` or `Super+Ctrl+Shift+J`|
-
----
-
-## Navigation
-
-| Action                   | Shortcut                          |
-|--------------------------|-----------------------------------|
-| **Focus Window Left**    | `Super+Right`                    |
-| **Focus Window Right**   | `Super+Left`                     |
-| **Focus Window Up**      | `Super+Up`                       |
-| **Focus Window Down**    | `Super+Down`                     |
-| **Focus Window In**      | `Super+I`                        |
-| **Focus Window Out**     | `Super+U`                        |
-| **Focus Previous Workspace** | Disabled                      |
-| **Focus Next Workspace**     | Disabled                      |
-| **Focus Last Workspace**     | `Super+0`                      |
-| **Focus Previous Output**    | `Super+Comma`                  |
-| **Focus Next Output**        | `Super+Period`                 |
-| **Switch to Output Left**    | Disabled                      |
-| **Switch to Output Right**   | Disabled                      |
-| **Switch to Output Up**      | Disabled                      |
-| **Switch to Output Down**    | Disabled                      |
-| **Switch to Workspace 1**    | `Super+1`                      |
-| **Switch to Workspace 2**    | `Super+2`                      |
-| **Switch to Workspace 3**    | `Super+3`                      |
-| **Switch to Workspace 4**    | `Super+4`                      |
-| **Switch to Workspace 5**    | `Super+5`                      |
-| **Switch to Workspace 6**    | `Super+6`                      |
-| **Switch to Workspace 7**    | `Super+7`                      |
-| **Switch to Workspace 8**    | `Super+8`                      |
-| **Switch to Workspace 9**    | `Super+9`                      |
-
----
-
-## System
-
-| Action                           | Shortcut                          |
-|----------------------------------|-----------------------------------|
-| **Open the App Library**         | `Super+A`                        |
-| **Open the Launcher**            | `Super+/`                    |
-| **Open the Workspace Overview**  | `Super+W`                        |
-| **Switch Between Open Windows**  | `Super+Tab` or `Alt+Tab`         |
-| **Switch Between Open Windows Reversed** | `Super+Shift+Tab` or `Alt+Shift+Tab` |
-| **Lock the Screen**              | `Super+Escape`                   |
-| **Decrease Audio Output Volume** | `XF86AudioLowerVolume`           |
-| **Increase Audio Output Volume** | `XF86AudioRaiseVolume`           |
-| **Mute Audio Output**            | `XF86AudioMute`                  |
-| **Mute Microphone Input**        | `XF86AudioMicMute`               |
-| **Play/Pause**                   | `XF86AudioPlay`                  |
-| **Next Track**                   | `XF86AudioNext`                  |
-| **Previous Track**               | `XF86AudioPrev`                  |
-| **Decrease Display Brightness**  | `XF86MonBrightnessDown`          |
-| **Increase Display Brightness**  | `XF86MonBrightnessUp`            |
-| **Decrease Keyboard Brightness** | Disabled                         |
-| **Increase Keyboard Brightness** | Disabled                         |
-| **Take a Screenshot**    | `Print`                          |
-| **Open a Terminal**      | `Super+T`                        |
-| **Open Home Folder**     | `Super+F`                        |
-| **Open a Web Browser**   | `Super+B`                        |
-| **Cycle Theme Previous** | `Super+Shift+[`        |
-| **Cycle Theme Next**     | `Super+Shift+]`       |
-| **Suspend**              | `Super+Ctrl+Alt+S`               |
-| **Spotify**              | `Super+Shift+S`                  |
-| **Text Editor**          | `Super+E`                        |
-| **Settings**             | `Super+;`                	      |	
-| **VSCode**               | `Super+C`                        |
-| **Discord**              | `Super+D`                        |
-| **PhoneSMS**             | `Super+\`                        |
-
----
+- **Switch between open windows:** The shortcut is `Super + Tab` or `Alt + Tab`.
+- **Switch between open windows in reverse:** The shortcut is `Super + Shift + Tab` or `Alt + Shift + Tab`.
+- **Focus the window to the left:** The shortcut is `Super + Right`.
+- **Focus the window to the right:** The shortcut is `Super + Left`.
+- **Focus the window above:** The shortcut is `Super + Up`.
+- **Focus the window below:** The shortcut is `Super + Down`.
+- **Focus the window inward:** The shortcut is `Super + I`.
+- **Focus the window outward:** The shortcut is `Super + U`.
 
 ## Window Tiling
 
-| Action                   | Shortcut                          |
-|--------------------------|-----------------------------------|
-| **Toggle Window Tiling** | `Super+Y`                        |
-| **Toggle Window Stacking** | `Super+S`                       |
-| **Toggle Window Floating** | `Super+G`                       |
-| **Toggle Orientation**   | `Super+O`                        |
-| **Set Horizontal Orientation** | Disabled                     |
-| **Set Vertical Orientation** | Disabled                      |
-| **Swap Window**          | `Super+X`                        |
+These shortcuts control the tiling window manager:
 
----
+- **Toggle window tiling on or off:** The shortcut is `Super + Y`.
+- **Toggle window stacking:** The shortcut is `Super + S`.
+- **Toggle window floating:** The shortcut is `Super + G`.
+- **Toggle tiling orientation (horizontal/vertical):** The shortcut is `Super + O`.
+- **Swap the position of two windows:** The shortcut is `Super + X`.
+- **Set horizontal or vertical orientation directly:** These shortcuts are disabled by default.
 
+## Switch Workspaces
 
+- **Open the Workspace Overview:** The shortcut is `Super + W`.
+- **Switch to a specific workspace:** Press `Super +` the workspace number. For
+  example, `Super + 1` switches to workspace 1, `Super + 2` to workspace 2, and
+  so on through `Super + 9` for workspace 9.
+- **Switch to the last workspace:** The shortcut is `Super + 0`.
 
+| Action | Shortcut |
+|--------|----------|
+| Switch to workspace 1–9 | `Super + 1` … `Super + 9` |
+| Switch to the last workspace | `Super + 0` |
+| Focus the previous or next workspace | Disabled |
+
+## Move a Window to Another Workspace
+
+- **Move the current window to a specific workspace:** Press `Super + Shift +`
+  the workspace number. For example, `Super + Shift + 1` moves the window to
+  workspace 1, through `Super + Shift + 9` for workspace 9.
+- **Move the current window to the last workspace:** The shortcut is `Super + Shift + 0`.
+
+| Action | Shortcut |
+|--------|----------|
+| Move window to workspace 1–9 | `Super + Shift + 1` … `Super + Shift + 9` |
+| Move window to the last workspace | `Super + Shift + 0` |
+| Move window to the previous or next workspace | Disabled |
+
+## Move a Window Between Monitors and Displays
+
+- **Move the current window one monitor down:** The shortcut is `Super + Ctrl + Shift + Down` or `Super + Ctrl + Shift + K`.
+- **Move the current window one monitor up:** The shortcut is `Super + Ctrl + Shift + Up` or `Super + Ctrl + Shift + J`.
+- **Move the current window one monitor left:** The shortcut is `Super + Ctrl + Shift + Left` or `Super + Ctrl + Shift + H`.
+- **Move the current window one monitor right:** The shortcut is `Super + Ctrl + Shift + Right` or `Super + Ctrl + Shift + L`.
+- **Move the current window to the next display:** The shortcut is `Super + Shift + Period`.
+- **Move the current window to the previous display:** The shortcut is `Super + Shift + Comma`.
+- **Focus the next display / output:** The shortcut is `Super + Period`.
+- **Focus the previous display / output:** The shortcut is `Super + Comma`.
+
+## Move a Window Within a Workspace
+
+- **Move the current window down:** The shortcut is `Super + Shift + Down` or `Super + Shift + J`.
+- **Move the current window up:** The shortcut is `Super + Shift + Up` or `Super + Shift + K`.
+- **Move the current window left:** The shortcut is `Super + Shift + Left` or `Super + Shift + H`.
+- **Move the current window right:** The shortcut is `Super + Shift + Right` or `Super + Shift + L`.

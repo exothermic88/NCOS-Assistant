@@ -1,74 +1,101 @@
-# **System Maintenance Guide**
+# System Maintenance Guide
 
-### Maintaining NCOS ensures a smooth and efficient system. Follow these Directions to keep your system up to date and running optimally.
+Maintaining NCOS keeps your system running smoothly. This guide covers updating
+packages, cleaning up unused files, managing services, and checking logs and
+system resources.
 
-## Keeping the System Updated
-To update all packages, run:
+## Update the System
+
+To update all official packages, run:
+
 ```bash
 sudo pacman -Syu
 ```
+
 To update AUR packages only, run:
+
 ```bash
 yay --aur
 ```
-For a full system upgrade including AUR packages :
+
+For a full system upgrade including AUR packages, run:
+
 ```bash
-yay 
+yay
 ```
----
-## Cleaning Up the System
-### Removing Unused Packages
-!!!warning
-	Always double check the package list before deleting
-To remove orphaned packages:
+
+Reboot after kernel updates.
+
+## Clean Up the System and Free Disk Space
+
+Cleaning up NCOS removes packages and cached files you no longer need, which
+frees disk space. This covers removing orphaned packages and clearing the pacman
+package cache. Always double-check the package list before deleting anything.
+
+**Remove unused (orphaned) packages.** Orphaned packages are dependencies that
+are no longer required by anything installed. To remove them:
+
 ```bash
 sudo pacman -Rns $(pacman -Qdtq)
 ```
 
-### Clearing the Package Cache
-To free up disk space:
+**Clear the package cache.** To free up disk space by clearing the pacman cache:
+
 ```bash
-sudo pacman -Sc  # Remove old package versions
-sudo pacman -Scc # Remove all cached packages
+sudo pacman -Sc   # Remove old package versions
+sudo pacman -Scc  # Remove all cached packages
 ```
----
-## Managing Services
+
+## Manage Services
+
 Check the status of a service:
+
 ```bash
 systemctl status <service-name>
 ```
-Enable a service at startup:
+
+Enable a service to start at boot:
+
 ```bash
 sudo systemctl enable <service-name>
 ```
-Disable a service:
+
+Disable a service so it no longer starts at boot:
+
 ```bash
 sudo systemctl disable <service-name>
 ```
-Restart a service:
+
+Restart a running service:
+
 ```bash
 sudo systemctl restart <service-name>
 ```
----
-## Checking System Logs
-View logs for troubleshooting:
+
+## Check System Logs
+
+View recent system logs for troubleshooting:
+
 ```bash
 journalctl -xe
 ```
+
 View logs for a specific service:
+
 ```bash
 journalctl -u <service-name> --no-pager
 ```
----
-## Monitoring System Resources
-To check system resource usage:
+
+## Monitor System Resources
+
+Check CPU and memory usage:
+
 ```bash
-htop 
+htop
 ```
-To check disk usage:
+
+Check disk usage:
+
 ```bash
 df -h
 ```
----
-
-

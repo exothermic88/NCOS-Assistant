@@ -1,62 +1,66 @@
-# Add NCOS Repository
+# Add the NCOS Repository
 
-Follow these steps to add the NCOS repository to your system and access NCOS-specific packages.
+Follow these steps to add the NCOS package repository to your system so you can
+install NCOS-specific packages with pacman.
 
-## Steps to Add the NCOS Repository
+## How to Add the NCOS Repository
 
-1.**Open pacman.conf file:**
-
-   Use the following command to open the `pacman.conf` file in any text editor:
+1. **Open the pacman.conf file.** Open `/etc/pacman.conf` in a text editor:
 
    ```bash
    sudo nano /etc/pacman.conf
    ```
-2. **Add NCOS repository configuration:**
 
-   Append the following text to the end of the file:
+2. **Add the NCOS repository configuration.** Append the following lines to the
+   end of the file:
 
    ```
    [ncos]
    SigLevel = Optional TrustAll
    Server = https://raw.githubusercontent.com/exothermic88/ncos-repo/main/$arch
    ```
-3. **Synchronize NCOS repository:**
 
-   Run the following command to add the NCOS repository to `pacman` (1):
-   { .annotate}
-   
-   1.	!!! info "To learn more about `pacman` for package maintanance, refer to the [arch wiki](https://wiki.archlinux.org/title/Pacman#)." 
+3. **Synchronize the NCOS repository.** Run this command so pacman picks up the
+   new repository. (For more about pacman package maintenance, see the Arch Wiki:
+   https://wiki.archlinux.org/title/Pacman)
 
    ```bash
    sudo pacman -Syy
    ```
-4. **Install NCOS-specific package:**
 
-   Use the following command to install a NCOS package:
+4. **Install an NCOS-specific package.** Use pacman to install any NCOS package,
+   replacing `ncos-package_name` with the real package name:
 
    ```bash
    sudo pacman -S ncos-package_name
    ```
-!!!example
-	```sudo pacman -S ncos-hotfix```
-5. **Apply the update:**
 
-   Run this command to apply the update:
+   For example, to install the NCOS hotfix package:
+
+   ```bash
+   sudo pacman -S ncos-hotfix
+   ```
+
+5. **Apply the package.** Run the package's command to apply it:
 
    ```bash
    ncos-package_name
    ```
-!!!example 
-	`ncos-hotfix`
-	
----
+
+   For example:
+
+   ```bash
+   ncos-hotfix
+   ```
+
 ## Future Updates
 
-When future updates are released for ncos packages that you have already installed, they will be automatically downloaded when you update your system packages using `sudo pacman -Syu`.
+When future updates are released for NCOS packages you have already installed,
+they are downloaded automatically when you update your system with
+`sudo pacman -Syu`.
 
-- To apply the updates, simply run the following command:
+To apply an update after it downloads, run the package command again:
 
-  ```bash
-  ncos-package_name
-  ```
-  
+```bash
+ncos-package_name
+```
