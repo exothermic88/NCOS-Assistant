@@ -3,6 +3,7 @@ use std::sync::Arc;
 use cosmic::app::{Core, Task};
 use cosmic::cosmic_config;
 use cosmic::cosmic_config::CosmicConfigEntry;
+use cosmic::iced::platform_specific::shell::commands::blur;
 use cosmic::iced::platform_specific::shell::commands::popup::{destroy_popup, get_popup};
 use cosmic::iced::window::Id;
 use cosmic::iced::{Limits, Subscription};
@@ -269,10 +270,21 @@ impl Application for NcosAssistant {
                     widget::text_input::focus(input_id()),
                 ];
                 // This libcosmic rev doesn't request blur for get_popup
-                // surfaces in applets; ask the compositor ourselves so the
-                // popup gets the frosted-glass effect when enabled.
+                // surfaces in applets, and iced's enable_blur only reaches
+                // winit windows — request the compositor's background-effect
+                // directly for the popup surface (whole-surface region; the
+                // compositor clips it). Queued until the surface exists.
                 if cosmic::theme::active().cosmic().frosted_applets {
-                    tasks.push(cosmic::iced::window::enable_blur(new_id));
+                    tasks.push(
+                        blur::blur(
+                            new_id,
+                            Some(vec![cosmic::iced::Rectangle::new(
+                                cosmic::iced::Point::ORIGIN,
+                                cosmic::iced::Size::new(4096.0, 4096.0),
+                            )]),
+                        )
+                        .discard(),
+                    );
                 }
                 let stale = !matches!(self.index_status, IndexStatus::Building { .. })
                     && rag::needs_rebuild(self.index.as_deref(), &self.config);
@@ -428,9 +440,16 @@ impl Application for NcosAssistant {
     }
 
     fn view(&self) -> Element<'_, Message> {
+        // Embedded icon: theme lookup of user-local hicolor icons is
+        // unreliable from the panel, so ship the symbolic SVG in the binary.
+        let mut handle = widget::icon::from_svg_bytes(
+            include_bytes!("../data/icons/io.github.exothermic88.ncos-assistant-symbolic.svg")
+                .as_slice(),
+        );
+        handle.symbolic = true;
         self.core
             .applet
-            .icon_button(APP_ID)
+            .icon_button_from_handle(handle)
             .on_press(Message::TogglePopup)
             .into()
     }
