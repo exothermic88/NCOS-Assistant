@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=ncOS Assistant
+Comment=AI assistant for ncOS, powered by Ollama
+Type=Application
+Exec=/home/nic/.local/bin/ncos-assistant
+Icon=io.github.exothermic88.ncos-assistant
+Terminal=false
+Categories=COSMIC;Utility;
+Keywords=assistant;ollama;ai;ncos;chat;help;
+NoDisplay=true
+X-CosmicApplet=true
+X-CosmicHoverPopup=Auto
+X-OverflowPriority=10

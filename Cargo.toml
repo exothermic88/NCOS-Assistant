@@ -1,0 +1,27 @@
+[package]
+name = "ncos-assistant"
+version = "0.1.0"
+edition = "2024"
+description = "ncOS virtual assistant applet for the COSMIC panel"
+license = "GPL-3.0-only"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+futures-util = "0.3"
+async-stream = "0.3"
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "stream"] }
+walkdir = "2"
+dirs = "6"
+
+[dependencies.libcosmic]
+git = "https://github.com/pop-os/libcosmic"
+rev = "ef162b8e16ba4493e05c169cd56c7b9f77f0fda5"
+default-features = false
+features = ["applet", "tokio", "wayland", "winit"]
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+panic = "abort"
