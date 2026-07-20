@@ -70,10 +70,12 @@ impl NcosAssistant {
         let scroll = widget::scrollable(
             widget::container(history).padding([0, spacing.space_xxs]),
         )
+        .anchor_bottom()
         .height(Length::Fill)
         .width(Length::Fill);
 
         let mut input = widget::text_input("Ask about ncOS…", &self.input)
+            .id(crate::app::input_id())
             .on_input(Message::InputChanged);
         if !self.streaming {
             input = input.on_submit(|_| Message::Send);

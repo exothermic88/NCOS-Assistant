@@ -146,6 +146,80 @@ pub fn build_index(
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use futures_util::StreamExt;
+
+    #[test]
+    fn chunker_splits_on_headings() {
+        let md = "# Title\n\nIntro text long enough to stand alone. Lorem ipsum dolor sit amet, \
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore \
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.\n\n\
+            ## Updating\n\nRun pacman -Syu to update the whole system. Partial upgrades are \
+            unsupported on Arch-based systems, so never install packages after a bare -Sy \
+            without doing the full system upgrade first. Reboot after kernel updates land.\n";
+        let chunks = chunker::chunk_markdown("test.md", md);
+        assert!(chunks.len() >= 2, "expected >=2 chunks, got {}", chunks.len());
+        assert_eq!(chunks[0].heading_path, "Title");
+        assert_eq!(chunks[1].heading_path, "Title > Updating");
+        assert!(chunks[1].text.contains("pacman -Syu"));
+    }
+
+    /// Live test against local Ollama: index docs/ and retrieve.
+    /// Run with: cargo test -- --ignored
+    #[tokio::test]
+    #[ignore]
+    async fn live_index_and_retrieve() {
+        let cfg = AssistantConfig::default();
+        let (host, port) = cfg.active_backend();
+        let client = OllamaClient::new(host, port);
+
+        let mut stream = Box::pin(build_index(client.clone(), cfg.clone()));
+        let mut finished = None;
+        while let Some(event) = stream.next().await {
+            match event {
+                IndexEvent::Finished(idx) => finished = Some(idx),
+                IndexEvent::Failed(e) => panic!("index build failed: {e}"),
+                IndexEvent::Progress { .. } => {}
+            }
+        }
+        let stored = finished.expect("no Finished event");
+        assert!(!stored.entries.is_empty());
+
+        let hits = retrieve(&client, &stored, &cfg, "how do I update the system?")
+            .await
+            .expect("retrieve failed");
+        assert!(!hits.is_empty());
+        assert_eq!(
+            hits[0].heading_path, "ncOS Overview > Updating the system",
+            "top hit was {} > {}",
+            hits[0].source, hits[0].heading_path
+        );
+    }
+
+    /// Live test of streaming chat parsing using the tiny gemma3:270m model.
+    #[tokio::test]
+    #[ignore]
+    async fn live_chat_stream() {
+        let client = OllamaClient::new("localhost", 11434);
+        let stream = client
+            .chat_stream(
+                "gemma3:270m".into(),
+                vec![crate::ollama::ChatMessage::new("user", "Say hello in one word.")],
+                None,
+            )
+            .await
+            .expect("chat_stream failed");
+        futures_util::pin_mut!(stream);
+        let mut out = String::new();
+        while let Some(item) = stream.next().await {
+            out.push_str(&item.expect("stream item error"));
+        }
+        assert!(!out.is_empty());
+    }
+}
+
 /// Embed the query and return the top-k most relevant chunks.
 pub async fn retrieve<'a>(
     client: &OllamaClient,

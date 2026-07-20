@@ -16,6 +16,10 @@ use crate::rag::{self, index::StoredIndex, IndexEvent};
 
 pub const APP_ID: &str = "io.github.exothermic88.ncos-assistant";
 
+pub fn input_id() -> widget::Id {
+    widget::Id::new("chat-input")
+}
+
 const SYSTEM_PROMPT: &str = "You are the ncOS Assistant, a helper for ncOS, an Arch Linux-based \
 distribution using the COSMIC desktop environment. Answer the user's questions concisely and \
 accurately. Prefer the documentation context below when it covers the question, and cite sources \
@@ -258,7 +262,11 @@ impl Application for NcosAssistant {
                     .min_height(300.0)
                     .max_height(640.0);
 
-                let mut tasks = vec![get_popup(popup_settings), self.health_task()];
+                let mut tasks = vec![
+                    get_popup(popup_settings),
+                    self.health_task(),
+                    widget::text_input::focus(input_id()),
+                ];
                 let stale = !matches!(self.index_status, IndexStatus::Building { .. })
                     && rag::needs_rebuild(self.index.as_deref(), &self.config);
                 if stale {
