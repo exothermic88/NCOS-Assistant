@@ -108,16 +108,15 @@ impl OllamaClient {
         &self,
         model: String,
         messages: Vec<ChatMessage>,
-        think: Option<bool>,
     ) -> Result<impl Stream<Item = Result<String, OllamaError>> + Send + use<>, OllamaError> {
-        let mut body = serde_json::json!({
+        // No `think` parameter: on current Ollama, `think: false` makes
+        // thinking models leak reasoning into `content`, while the default
+        // routes it to the separate `thinking` field, which we skip.
+        let body = serde_json::json!({
             "model": model,
             "messages": messages,
             "stream": true,
         });
-        if let Some(think) = think {
-            body["think"] = serde_json::Value::Bool(think);
-        }
         let resp = self
             .http
             .post(format!("{}/api/chat", self.base))

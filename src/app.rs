@@ -483,11 +483,7 @@ fn chat_flow(
         messages.extend(history);
         messages.push(ChatMessage::new("user", &prompt));
 
-        // qwen3 and deepseek-r1 support toggling thinking off; leave others alone.
-        let think = (cfg.chat_model.starts_with("qwen3") || cfg.chat_model.starts_with("deepseek-r1"))
-            .then_some(false);
-
-        match client.chat_stream(cfg.chat_model.clone(), messages, think).await {
+        match client.chat_stream(cfg.chat_model.clone(), messages).await {
             Ok(stream) => {
                 futures_util::pin_mut!(stream);
                 while let Some(item) = stream.next().await {

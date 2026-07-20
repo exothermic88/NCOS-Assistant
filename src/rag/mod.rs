@@ -207,7 +207,6 @@ mod tests {
             .chat_stream(
                 "gemma3:270m".into(),
                 vec![crate::ollama::ChatMessage::new("user", "Say hello in one word.")],
-                None,
             )
             .await
             .expect("chat_stream failed");
