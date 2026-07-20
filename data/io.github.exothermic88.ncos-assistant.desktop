@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=ncOS Assistant
-Comment=AI assistant for ncOS, powered by Ollama
+Name=NCOS Assistant
+Comment=AI assistant for NCOS, powered by Ollama
 Type=Application
 Exec=/home/nic/.local/bin/ncos-assistant
 Icon=io.github.exothermic88.ncos-assistant

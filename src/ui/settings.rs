@@ -55,6 +55,10 @@ impl NcosAssistant {
                     .width(Length::Fixed(180.0)),
             ))
             .add(widget::settings::item(
+                "Show sources",
+                widget::toggler(config.show_sources).on_toggle(Message::SetShowSources),
+            ))
+            .add(widget::settings::item(
                 "Context chunks",
                 widget::spin_button(
                     config.top_k.to_string(),

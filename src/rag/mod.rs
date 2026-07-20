@@ -192,7 +192,7 @@ mod tests {
             .expect("retrieve failed");
         assert!(!hits.is_empty());
         assert_eq!(
-            hits[0].heading_path, "ncOS Overview > Updating the system",
+            hits[0].heading_path, "NCOS Overview > Updating the system",
             "top hit was {} > {}",
             hits[0].source, hits[0].heading_path
         );

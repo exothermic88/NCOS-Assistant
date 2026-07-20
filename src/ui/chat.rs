@@ -9,7 +9,7 @@ impl NcosAssistant {
         let spacing = cosmic::theme::spacing();
 
         let header = widget::Row::new()
-            .push(widget::text::title4("ncOS Assistant"))
+            .push(widget::text::title4("NCOS Assistant"))
             .push(widget::Space::new().width(Length::Fill))
             .push(
                 widget::button::icon(widget::icon::from_name("edit-clear-all-symbolic"))
@@ -27,7 +27,7 @@ impl NcosAssistant {
         let mut history = widget::Column::new().spacing(spacing.space_s).width(Length::Fill);
         if self.history.is_empty() {
             history = history.push(
-                widget::container(widget::text::body("Ask anything about ncOS."))
+                widget::container(widget::text::body("Ask anything about NCOS."))
                     .width(Length::Fill)
                     .align_x(Alignment::Center)
                     .padding([spacing.space_l, 0]),
@@ -56,7 +56,7 @@ impl NcosAssistant {
                     let mut answer = widget::Column::new()
                         .push(widget::text::body(text))
                         .spacing(spacing.space_xxxs);
-                    if !entry.sources.is_empty() {
+                    if self.config().show_sources && !entry.sources.is_empty() {
                         answer = answer.push(widget::text::caption(format!(
                             "Sources: {}",
                             entry.sources.join(" · ")
@@ -74,7 +74,7 @@ impl NcosAssistant {
         .height(Length::Fill)
         .width(Length::Fill);
 
-        let mut input = widget::text_input("Ask about ncOS…", &self.input)
+        let mut input = widget::text_input("Ask about NCOS…", &self.input)
             .id(crate::app::input_id())
             .on_input(Message::InputChanged);
         if !self.streaming {

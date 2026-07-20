@@ -20,7 +20,7 @@ pub fn input_id() -> widget::Id {
     widget::Id::new("chat-input")
 }
 
-const SYSTEM_PROMPT: &str = "You are the ncOS Assistant, a helper for ncOS, an Arch Linux-based \
+const SYSTEM_PROMPT: &str = "You are the NCOS Assistant, a helper for NCOS, an Arch Linux-based \
 distribution using the COSMIC desktop environment. Answer the user's questions concisely and \
 accurately. Prefer the documentation context below when it covers the question, and cite sources \
 inline like [source: file.md > heading]. If the documentation does not cover the question, say so \
@@ -103,6 +103,7 @@ pub enum Message {
     SetChatModel(String),
     SetEmbedModel(String),
     SetTopK(u32),
+    SetShowSources(bool),
     NewDocsPathChanged(String),
     AddDocsPath,
     RemoveDocsPath(usize),
@@ -267,6 +268,12 @@ impl Application for NcosAssistant {
                     self.health_task(),
                     widget::text_input::focus(input_id()),
                 ];
+                // This libcosmic rev doesn't request blur for get_popup
+                // surfaces in applets; ask the compositor ourselves so the
+                // popup gets the frosted-glass effect when enabled.
+                if cosmic::theme::active().cosmic().frosted_applets {
+                    tasks.push(cosmic::iced::window::enable_blur(new_id));
+                }
                 let stale = !matches!(self.index_status, IndexStatus::Building { .. })
                     && rag::needs_rebuild(self.index.as_deref(), &self.config);
                 if stale {
@@ -387,6 +394,10 @@ impl Application for NcosAssistant {
             }
             Message::SetTopK(value) => {
                 self.save_config(|c| c.top_k = value);
+                Task::none()
+            }
+            Message::SetShowSources(value) => {
+                self.save_config(|c| c.show_sources = value);
                 Task::none()
             }
             Message::NewDocsPathChanged(value) => {

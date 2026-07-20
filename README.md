@@ -1,6 +1,6 @@
-# ncOS Assistant
+# NCOS Assistant
 
-A COSMIC panel applet that answers questions about ncOS. It chats with a
+A COSMIC panel applet that answers questions about NCOS. It chats with a
 local (or LAN) [Ollama](https://ollama.com) model and grounds its answers in
 your own documentation using retrieval-augmented generation: markdown files
 are chunked by heading, embedded with `nomic-embed-text`, and the most
@@ -28,7 +28,7 @@ just install
 Then:
 
 1. **COSMIC Settings → Desktop → Panel → Configure panel applets → Add
-   "ncOS Assistant"** — the chat-bubble icon appears in the panel.
+   "NCOS Assistant"** — the chat-bubble icon appears in the panel.
 2. **COSMIC Settings → Appearance → Frosted Glass** — enable the effect for
    applets to get the frosted popup. (Without it the popup is normal opaque;
    that's the compositor setting, not the applet.)

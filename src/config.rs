@@ -18,6 +18,7 @@ pub struct AssistantConfig {
     pub embed_model: String,
     pub docs_paths: Vec<String>,
     pub top_k: u32,
+    pub show_sources: bool,
 }
 
 impl Default for AssistantConfig {
@@ -32,6 +33,7 @@ impl Default for AssistantConfig {
             embed_model: "nomic-embed-text".into(),
             docs_paths: vec!["/home/nic/claude_projects/assistant_ai/docs".into()],
             top_k: 4,
+            show_sources: true,
         }
     }
 }
