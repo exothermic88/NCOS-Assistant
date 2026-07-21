@@ -44,13 +44,13 @@ impl NcosAssistant {
             .title("Models")
             .add(widget::settings::item(
                 "Chat model",
-                widget::text_input("qwen3:4b", &config.chat_model)
+                widget::text_input("llama3.2:1b", &config.chat_model)
                     .on_input(Message::SetChatModel)
                     .width(Length::Fixed(180.0)),
             ))
             .add(widget::settings::item(
                 "Embedding model",
-                widget::text_input("nomic-embed-text", &config.embed_model)
+                widget::text_input("embeddinggemma:300m", &config.embed_model)
                     .on_input(Message::SetEmbedModel)
                     .width(Length::Fixed(180.0)),
             ))

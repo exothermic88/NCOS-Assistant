@@ -1,5 +1,5 @@
 pkgname=ncos-assistant
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="NCOS virtual assistant applet for the COSMIC panel"
 arch=('x86_64')
@@ -7,9 +7,9 @@ url="https://github.com/exothermic88/NCOS-Assistant"
 license=('GPL-3.0-only')
 depends=('glibc' 'gcc-libs' 'libxkbcommon' 'wayland' 'openssl')
 makedepends=('cargo' 'git')
-optdepends=('ollama: local LLM backend (pull qwen3:4b and nomic-embed-text models)')
+optdepends=('ollama: local LLM backend (pull llama3.2:1b and embeddinggemma:300m models)')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('ae7588bd7272821cbfd95288f27ac408369a4c02cfc4b6d0a8457f5b7d326ef9')
 
 prepare() {
   cd "NCOS-Assistant-$pkgver"

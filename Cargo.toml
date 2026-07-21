@@ -1,6 +1,6 @@
 [package]
 name = "ncos-assistant"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "NCOS virtual assistant applet for the COSMIC panel"
 license = "GPL-3.0-only"

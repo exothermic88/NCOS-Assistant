@@ -3,7 +3,7 @@
 A COSMIC panel applet that answers questions about NCOS. It chats with a
 local (or LAN) [Ollama](https://ollama.com) model and grounds its answers in
 your own documentation using retrieval-augmented generation: markdown files
-are chunked by heading, embedded with `nomic-embed-text`, and the most
+are chunked by heading, embedded with `embeddinggemma:300m`, and the most
 relevant chunks are given to the chat model with every question, cited as
 `[source: file.md > heading]`.
 
@@ -18,8 +18,8 @@ relevant chunks are given to the chat model with every question, cited as
 ```sh
 # 1. Ollama service + models
 sudo systemctl enable --now ollama
-ollama pull nomic-embed-text   # embeddings (~270 MB)
-ollama pull qwen3:4b           # chat model (~2.5 GB)
+ollama pull embeddinggemma:300m   # embeddings (~600 MB)
+ollama pull llama3.2:1b           # chat model (~1.3 GB)
 
 # 2. Build and install (installs to ~/.local)
 just install
@@ -48,8 +48,8 @@ Settings live in the popup (gear icon) and persist via cosmic-config under
 
 - **Ollama server** — local by default (`localhost:11434`); toggle "Use
   remote server" to point at another machine on your network.
-- **Models** — chat model (default `qwen3:4b`) and embedding model
-  (default `nomic-embed-text`). Changing the embedding model invalidates
+- **Models** — chat model (default `llama3.2:1b`) and embedding model
+  (default `embeddinggemma:300m`). Changing the embedding model invalidates
   the index and triggers a rebuild.
 - **Context chunks** — how many document chunks are retrieved per question.
 
