@@ -16,3 +16,6 @@ uninstall:
 
 run:
     cargo run --release
+
+package:
+    cd packaging && makepkg -sf --cleanbuild

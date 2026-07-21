@@ -1,0 +1,36 @@
+pkgname=ncos-assistant
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="NCOS virtual assistant applet for the COSMIC panel"
+arch=('x86_64')
+url="https://github.com/exothermic88/NCOS-Assistant"
+license=('GPL-3.0-only')
+depends=('glibc' 'gcc-libs' 'libxkbcommon' 'wayland' 'openssl')
+makedepends=('cargo' 'git')
+optdepends=('ollama: local LLM backend (pull qwen3:4b and nomic-embed-text models)')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+prepare() {
+  cd "NCOS-Assistant-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  cd "NCOS-Assistant-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  cargo build --frozen --release
+}
+
+package() {
+  cd "NCOS-Assistant-$pkgver"
+  install -Dm755 target/release/ncos-assistant "$pkgdir/usr/bin/ncos-assistant"
+  install -Dm644 data/io.github.exothermic88.ncos-assistant.desktop \
+    "$pkgdir/usr/share/applications/io.github.exothermic88.ncos-assistant.desktop"
+  install -Dm644 data/icons/io.github.exothermic88.ncos-assistant-symbolic.svg \
+    "$pkgdir/usr/share/icons/hicolor/scalable/apps/io.github.exothermic88.ncos-assistant-symbolic.svg"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -dm755 "$pkgdir/usr/share/ncos-assistant/docs"
+  install -m644 docs/*.md "$pkgdir/usr/share/ncos-assistant/docs/"
+}

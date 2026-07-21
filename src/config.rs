@@ -31,7 +31,7 @@ impl Default for AssistantConfig {
             remote_port: 11434,
             chat_model: "qwen3:4b".into(),
             embed_model: "nomic-embed-text".into(),
-            docs_paths: vec!["/home/nic/claude_projects/assistant_ai/docs".into()],
+            docs_paths: vec!["/usr/share/ncos-assistant/docs".into()],
             top_k: 4,
             show_sources: true,
         }

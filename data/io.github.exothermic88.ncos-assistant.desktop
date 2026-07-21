@@ -2,7 +2,7 @@
 Name=NCOS Assistant
 Comment=AI assistant for NCOS, powered by Ollama
 Type=Application
-Exec=/home/nic/.local/bin/ncos-assistant
+Exec=ncos-assistant
 Icon=io.github.exothermic88.ncos-assistant
 Terminal=false
 Categories=COSMIC;Utility;
