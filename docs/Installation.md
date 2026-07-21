@@ -1,43 +1,44 @@
 # NCOS Installation Guide
 
-This guide walks through installing NCOS from the live environment after you have
-created a bootable USB (see the Pre-Installation Guide). Follow the steps in
-order: boot the live environment, set your region and keyboard, partition the
+This guide explains how to install NCOS from the live environment after you have
+created a bootable USB (see the Pre-Installation Guide). Each step below is
+written as a plain-language statement so you can find exactly what to do at each
+stage: boot the live environment, set your region and keyboard, partition the
 drive, create a user, and begin the installation.
 
 ## Boot into the Live Environment
 
-- Insert the NCOS installation media (USB or ISO).
-- Boot from the installation media.
-- The live environment loads, and the installer launches automatically.
+These statements cover starting the NCOS installer:
+
+- **Start the NCOS installer:** To start installing NCOS, insert the NCOS installation media (USB or ISO) and boot the computer from it.
+- **The installer opens automatically:** When the NCOS live environment loads, the installer launches automatically — you do not need to start it yourself.
 
 ## Select Region, Timezone, and System Language
 
-- Choose your preferred **region** and **timezone**.
-- Select the **system language** for your installation.
+- **Set the region and timezone:** In the NCOS installer, choose your preferred region and timezone from the list.
+- **Set the system language:** In the NCOS installer, select the system language you want your installation to use.
 
 ## Configure the Keyboard Layout
 
-- Pick your **keyboard layout** from the available options.
-- Test the layout to make sure it is correct.
+- **Choose a keyboard layout:** In the NCOS installer, pick your keyboard layout from the available options.
+- **Verify the keyboard layout:** Use the installer's test field to type and confirm the layout is correct before continuing.
 
 ## Partition the Drive
 
-Choose the **target drive** for installation, then select one of the
-partitioning methods:
+In the NCOS installer, choose the target drive for installation, then select one
+of the four partitioning methods:
 
-1. **Install alongside existing OS** – Keeps current partitions and installs NCOS alongside them.
-2. **Replace a partition** – Overwrites an existing partition with NCOS.
-3. **Erase disk** – Deletes all partitions and installs NCOS on a clean disk.
-4. **Manual partitioning** – Lets advanced users create custom partitions.
+- **Install alongside an existing OS:** The "Install alongside" option keeps your current partitions and installs NCOS next to them (dual boot).
+- **Replace a partition:** The "Replace a partition" option overwrites one existing partition with NCOS and leaves the others untouched.
+- **Erase the disk:** The "Erase disk" option deletes all partitions on the drive and installs NCOS on a clean disk. This removes all existing data on that drive.
+- **Manual partitioning:** The "Manual partitioning" option lets advanced users create and assign custom partitions themselves.
 
 ## Create a User Account
 
-- Enter a **username** and **password** for your account.
-- Optionally, enable **automatic login** or require a password at startup.
+- **Create your user:** In the NCOS installer, enter a username and password for your account.
+- **Choose the login behavior:** You can optionally enable automatic login, or require the password at startup.
 
 ## Begin the Installation
 
-- Review your settings.
-- Click **Install** to begin the process.
-- Wait for the installation to complete, then reboot into your new NCOS system.
+- **Start the installation:** After reviewing your settings, click "Install" to begin installing NCOS.
+- **Finish and reboot:** Wait for the installation to complete, then reboot the computer into your new NCOS system.
