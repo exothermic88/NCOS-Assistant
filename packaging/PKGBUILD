@@ -9,7 +9,7 @@ depends=('glibc' 'gcc-libs' 'libxkbcommon' 'wayland' 'openssl')
 makedepends=('cargo' 'git')
 optdepends=('ollama: local LLM backend (pull llama3.2:1b and embeddinggemma:300m models)')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('ae7588bd7272821cbfd95288f27ac408369a4c02cfc4b6d0a8457f5b7d326ef9')
+sha256sums=('02c25f44fefb2d4428d8aecc774dd1918bb7392c37ede22ed02aa014afdc05e9')
 
 prepare() {
   cd "NCOS-Assistant-$pkgver"
