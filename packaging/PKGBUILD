@@ -1,5 +1,5 @@
 pkgname=ncos-assistant
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="NCOS virtual assistant applet for the COSMIC panel"
 arch=('x86_64')

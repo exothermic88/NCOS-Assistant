@@ -1,32 +1,42 @@
 # NCOS Overview
 
-NCOS is an Arch Linux–based distribution built around the COSMIC desktop
-environment. Each statement below describes one aspect of NCOS: what it is
-based on, how it updates, and what desktop it runs.
+NCOS is a lightweight, rolling-release Linux distribution based on Arch Linux with
+the COSMIC desktop. It comes ready to use with tiling, themes, snapshots, and an
+offline AI assistant already set up.
 
 ## What NCOS Is
 
-- **Base distribution:** NCOS is based on Arch Linux and ships as an archiso-based live image.
-- **Release model:** NCOS follows Arch's rolling-release model, so packages update continuously rather than in fixed version releases.
+- **Base distribution:** NCOS is based on Arch Linux.
+- **Release model:** NCOS is a rolling release, so packages update continuously instead of in fixed version releases.
+- **Desktop:** NCOS runs the COSMIC desktop environment by System76, on Wayland. The compositor is cosmic-comp.
+- **Filesystem:** NCOS installs on btrfs by default, with zstd compression and subvolumes `@`, `@home`, `@root`, `@srv`, `@cache`, `@log`, and `@tmp`.
+- **Package manager:** NCOS uses `pacman`, with `yay` for AUR packages and COSMIC Store for graphical app installs.
+- **Current version:** The latest NCOS release is NCOS 2.1.3.
 
-## Updating the System
+## What Is New in NCOS 2.1.3
 
-- **Package manager:** NCOS uses pacman, the Arch Linux package manager.
-- **Update everything:** The command to update the entire NCOS system is:
+- **Now Playing applet:** NCOS 2.1.3 adds a panel applet that shows the current song with album art.
+- **Tiling Assistant:** NCOS 2.1.3 adds the Tiling Assistant, an app for choosing which apps open floating instead of tiled.
+- **Ollama included:** Ollama now ships on the NCOS ISO, so the NCOS Assistant works out of the box.
+- **Snapshots:** NCOS 2.1.3 tunes grub-btrfs so snapshot boot entries are named by date and description.
 
-  ```sh
-  sudo pacman -Syu
-  ```
+## Default Apps on NCOS
 
-- **Reboot after kernel updates:** After an update that includes a new kernel, reboot NCOS so the new kernel takes effect.
-- **Never do partial upgrades:** Partial upgrades are unsupported on NCOS — never run `pacman -Sy` and then install packages without doing a full system upgrade (`sudo pacman -Syu`) first.
+These apps come preinstalled on NCOS:
 
-## Desktop Environment
+- **COSMIC Store:** Install apps with a graphical store.
+- **COSMIC Monitor:** Monitor CPU, memory, and processes.
+- **Timeshift:** Take system backups and snapshots.
+- **LocalSend:** Send files to nearby phones and computers.
+- **Popsicle:** Flash ISO images to USB drives.
+- **GNOME Network Displays:** Cast your screen wirelessly to a TV.
+- **Android Messages:** Send text messages from your desktop.
+- **kitty:** The default NCOS terminal.
+- **NCOS Assistant:** The offline AI assistant in the panel.
 
-- **Desktop:** NCOS runs the COSMIC desktop environment by System76.
-- **Settings:** On NCOS, panel applets, theming, and the frosted-glass appearance effect are all managed through COSMIC Settings.
-- **Compositor:** The NCOS compositor is cosmic-comp, running on Wayland.
+## Report a Bug or Contribute to NCOS
 
-## Getting Help
-
-- **Ask questions about NCOS:** You can ask questions about NCOS directly to the NCOS Assistant applet in the panel, which answers using this documentation.
+- **Report a bug:** To report a bug or suggest an idea for NCOS, open an issue on the NCOS GitHub repository at https://github.com/exothermic88/NCOS.
+- **Contribute:** Patches and documentation fixes for NCOS are welcome on the same GitHub repository.
+- **Download NCOS:** The latest NCOS ISO is on the NCOS website at https://exothermic88.github.io/.
+- **Ask the Assistant:** You can ask questions about NCOS in the NCOS Assistant applet in the panel, which answers using this documentation.

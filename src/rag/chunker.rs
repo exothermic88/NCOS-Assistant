@@ -67,10 +67,17 @@ pub fn chunk_markdown(source: &str, content: &str) -> Vec<Chunk> {
     }
     flush(&mut sections, &heading_stack, &mut current);
 
-    // Merge tiny sections into their predecessor, split oversized ones.
+    // Merge tiny sections into their predecessor, split oversized ones. A tiny
+    // leading section (e.g. a page intro) has no predecessor, so it is carried
+    // forward into the next section instead of becoming a near-empty chunk.
     let mut chunks: Vec<Chunk> = Vec::new();
-    for (path, body) in sections {
+    let mut carried: Option<String> = None;
+    let section_count = sections.len();
+    for (i, (path, mut body)) in sections.into_iter().enumerate() {
         let heading_path = path.join(" > ");
+        if let Some(intro) = carried.take() {
+            body = format!("{intro}\n\n{body}");
+        }
         if body.len() < MIN_CHUNK_CHARS {
             if let Some(prev) = chunks.last_mut() {
                 prev.text.push_str("\n\n");
@@ -78,6 +85,10 @@ pub fn chunk_markdown(source: &str, content: &str) -> Vec<Chunk> {
                     prev.text.push_str(&format!("## {heading_path}\n"));
                 }
                 prev.text.push_str(&body);
+                continue;
+            }
+            if i + 1 < section_count {
+                carried = Some(body);
                 continue;
             }
         }

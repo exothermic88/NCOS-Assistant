@@ -1,49 +1,57 @@
-# Add the NCOS Repository
+# NCOS Package Repository
 
-This page explains how to add the NCOS package repository to your system so you
-can install NCOS-specific packages with pacman. Each step below is written as a
-plain-language statement with the exact command to run.
+NCOS has its own pacman repository, `[ncos]`, with first-party NCOS apps and panel
+applets. It is already enabled on NCOS 2.0 and later.
 
-## How to Add the NCOS Repository
+## NCOS Packages
 
-- **Step 1 — Open the pacman configuration file:** To add the NCOS repository, first open `/etc/pacman.conf` in a text editor:
+These packages are in the `[ncos]` repository:
 
-  ```bash
-  sudo nano /etc/pacman.conf
-  ```
+- **ncos-assistant:** The NCOS Assistant, an offline AI assistant applet for the panel.
+- **ncos-package-update-applet:** A panel applet that shows pending package updates and firmware updates.
+- **ncos-weather-applet:** A panel applet that shows the weather.
+- **ncos-now-playing-applet:** A panel applet that shows the song currently playing, with album art. It works with any MPRIS media player.
+- **ncos-tiling-assistant:** The Tiling Assistant, an app for choosing which apps open floating instead of tiled.
 
-- **Step 2 — Add the NCOS repository entry:** Append the following lines to the end of `/etc/pacman.conf`:
+## Install an NCOS Package
 
-  ```
-  [ncos]
-  SigLevel = Optional TrustAll
-  Server = https://raw.githubusercontent.com/exothermic88/ncos-repo/main/$arch
-  ```
+On NCOS 2.0 and later the `[ncos]` repository is already enabled, so you can install any NCOS package with `sudo pacman -S` followed by the package name.
 
-- **Step 3 — Synchronize the repository:** The command to make pacman pick up the new NCOS repository is:
+Install the NCOS Assistant:
 
-  ```bash
-  sudo pacman -Syy
-  ```
+```bash
+sudo pacman -S ncos-assistant
+```
 
-  For more about pacman package maintenance, see the Arch Wiki:
-  https://wiki.archlinux.org/title/Pacman
+Install the NCOS weather applet and the Now Playing applet:
 
-## How to Install an NCOS Package
+```bash
+sudo pacman -S ncos-weather-applet ncos-now-playing-applet
+```
 
-- **Install a package:** The command to install an NCOS-specific package is `sudo pacman -S ncos-package_name`, replacing `ncos-package_name` with the real package name. For example, to install the NCOS hotfix package:
+## Update NCOS Packages
 
-  ```bash
-  sudo pacman -S ncos-hotfix
-  ```
+NCOS packages update together with the rest of the system. No extra command is needed:
 
-- **Apply the package:** After installing an NCOS package, run the package's own command to apply it. For example, to apply the hotfix package:
+```bash
+sudo pacman -Syu
+```
 
-  ```bash
-  ncos-hotfix
-  ```
+## Add the NCOS Repository on Older Installs
 
-## Future Updates to NCOS Packages
+Systems installed before NCOS 2.0, or other Arch-based systems, need to add the repository by hand.
 
-- **Updates download automatically:** When updates are released for NCOS packages you have installed, they are downloaded automatically when you update your system with `sudo pacman -Syu`.
-- **Updates must be applied manually:** To apply an NCOS package update after it downloads, run the package command again (for example, `ncos-hotfix`).
+1. Open `/etc/pacman.conf` in a text editor as root.
+2. Add these lines to the end of the file:
+
+```
+[ncos]
+SigLevel = Optional TrustAll
+Server = https://raw.githubusercontent.com/exothermic88/ncos-repo/main/$arch
+```
+
+3. Sync the package databases:
+
+```bash
+sudo pacman -Syy
+```

@@ -166,12 +166,43 @@ mod tests {
         assert!(chunks[1].text.contains("pacman -Syu"));
     }
 
+    /// The bundled docs feed a ~1B chat model, so every chunk must carry a
+    /// heading breadcrumb, stay small, and be free of wiki-only markup.
+    #[test]
+    fn bundled_docs_chunk_cleanly() {
+        let docs = Path::new(env!("CARGO_MANIFEST_DIR")).join("docs");
+        let mut total = 0;
+        for entry in std::fs::read_dir(&docs).expect("docs/ missing") {
+            let path = entry.unwrap().path();
+            if path.extension().and_then(|e| e.to_str()) != Some("md") {
+                continue;
+            }
+            let name = path.file_name().unwrap().to_string_lossy().into_owned();
+            let content = std::fs::read_to_string(&path).unwrap();
+            for marker in ["!!!", "???", "{ .annotate", "<div"] {
+                assert!(!content.contains(marker), "{name} contains wiki markup {marker:?}");
+            }
+            for chunk in chunker::chunk_markdown(&name, &content) {
+                total += 1;
+                assert!(!chunk.heading_path.is_empty(), "{name} has a chunk with no heading");
+                assert!(
+                    chunk.text.len() <= 1600,
+                    "{name} > {} is {} chars",
+                    chunk.heading_path,
+                    chunk.text.len()
+                );
+            }
+        }
+        assert!(total > 0, "no chunks produced from docs/");
+    }
+
     /// Live test against local Ollama: index docs/ and retrieve.
     /// Run with: cargo test -- --ignored
     #[tokio::test]
     #[ignore]
     async fn live_index_and_retrieve() {
-        let cfg = AssistantConfig::default();
+        let mut cfg = AssistantConfig::default();
+        cfg.docs_paths = vec![concat!(env!("CARGO_MANIFEST_DIR"), "/docs").into()];
         let (host, port) = cfg.active_backend();
         let client = OllamaClient::new(host, port);
 

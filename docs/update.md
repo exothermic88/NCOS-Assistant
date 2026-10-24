@@ -1,67 +1,112 @@
-# System Maintenance Guide
+# System Maintenance
 
-Maintaining NCOS keeps your system running smoothly. Each item below is written
-as a plain-language statement with the exact command to run: updating packages,
-cleaning up unused files, managing services, and checking logs and system
-resources.
+How to keep NCOS updated and running well: updating packages, cleaning up disk
+space, managing services, and reading logs.
 
 ## Update the System
 
-These statements cover updating NCOS packages:
+Update all official packages (and NCOS packages) with pacman:
 
-- **Update all official packages:** The command to update all official NCOS packages is:
+```bash
+sudo pacman -Syu
+```
 
-  ```bash
-  sudo pacman -Syu
-  ```
+Update everything, including AUR packages, with yay:
 
-- **Update AUR packages only:** The command to update only AUR packages is:
+```bash
+yay
+```
 
-  ```bash
-  yay --aur
-  ```
+Update only AUR packages:
 
-- **Full system upgrade including AUR:** The command for a full system upgrade including AUR packages is:
+```bash
+yay --aur
+```
 
-  ```bash
-  yay
-  ```
+## Update Rules: No Partial Upgrades and Reboot After Kernel Updates
 
-- **Reboot after kernel updates:** After an update that includes a new kernel, reboot NCOS so the new kernel takes effect.
+- **No partial upgrades:** Partial upgrades are not supported on NCOS. Never run `sudo pacman -Sy` and then install a package without doing a full upgrade first. Always use `sudo pacman -Syu`.
+- **Reboot after kernel updates:** After an update that includes a new Linux kernel, reboot so the new kernel is used.
+- **Snapshot first:** Take a Timeshift snapshot before big updates so you can roll back if something breaks.
 
-## Clean Up the System and Free Disk Space
+## Remove Unused (Orphaned) Packages
 
-Cleaning up NCOS removes packages and cached files you no longer need, which
-frees disk space. Always double-check the package list before deleting anything.
+Orphaned packages were installed as dependencies but are no longer needed. Always check the package list before confirming.
 
-- **Remove unused (orphaned) packages:** Orphaned packages are dependencies no longer required by anything installed. The command to remove them is:
+Remove orphaned packages:
 
-  ```bash
-  sudo pacman -Rns $(pacman -Qdtq)
-  ```
+```bash
+sudo pacman -Rns $(pacman -Qdtq)
+```
 
-- **Clear the package cache:** The commands to free disk space by clearing the pacman cache are:
+## Clear the Package Cache to Free Disk Space
 
-  ```bash
-  sudo pacman -Sc   # Remove old package versions
-  sudo pacman -Scc  # Remove all cached packages
-  ```
+Remove old versions of cached packages:
 
-## Manage Services
+```bash
+sudo pacman -Sc
+```
 
-These statements cover managing systemd services on NCOS:
+Remove all cached packages:
 
-- **Check the status of a service:** The command to check a service's status is `systemctl status <service-name>`.
-- **Enable a service at boot:** The command to enable a service so it starts at boot is `sudo systemctl enable <service-name>`.
-- **Disable a service at boot:** The command to disable a service so it no longer starts at boot is `sudo systemctl disable <service-name>`.
-- **Restart a running service:** The command to restart a running service is `sudo systemctl restart <service-name>`.
+```bash
+sudo pacman -Scc
+```
 
-## Check System Logs
+## Manage Services with systemctl
 
-- **View recent system logs:** The command to view recent system logs for troubleshooting is `journalctl -xe`.
-- **View logs for a specific service:** The command to view logs for one service is `journalctl -u <service-name> --no-pager`.
+Replace `<service-name>` with the name of the service, for example `ollama`.
 
-## Monitor System Resources
+Check whether a service is running:
 
-- **Check CPU and memory usage:** The command to monitor CPU and memory usage on NCOS is `htop`.
-- **Check disk usage:** The command to check disk usage is `df -h`.
+```bash
+systemctl status <service-name>
+```
+
+Start a service at boot:
+
+```bash
+sudo systemctl enable <service-name>
+```
+
+Stop a service from starting at boot:
+
+```bash
+sudo systemctl disable <service-name>
+```
+
+Restart a service:
+
+```bash
+sudo systemctl restart <service-name>
+```
+
+## Check System Logs with journalctl
+
+View recent system logs with explanations, useful for troubleshooting:
+
+```bash
+journalctl -xe
+```
+
+View the logs of one service:
+
+```bash
+journalctl -u <service-name> --no-pager
+```
+
+## Check CPU, Memory, and Disk Usage
+
+See CPU and memory usage and running processes in the terminal:
+
+```bash
+htop
+```
+
+See how much disk space is used and free:
+
+```bash
+df -h
+```
+
+You can also open COSMIC Monitor from the App Library (`Super+A`) for a graphical view.
